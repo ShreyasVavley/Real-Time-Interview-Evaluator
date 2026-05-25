@@ -1,0 +1,510 @@
+/* ============================================================
+   styles.css - Glassmorphic Dark Theme
+   Real-Time Mock Interview Evaluator
+   Injected via st.markdown with unsafe_allow_html=True
+   All selectors use specificity boosts to override Streamlit defaults.
+   ============================================================ */
+
+/* ── Google Fonts ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── CSS Custom Properties (Design Tokens) ───────────────── */
+:root {
+    --bg-primary:       #080d1a;
+    --bg-secondary:     #0d1527;
+    --bg-card:          rgba(255, 255, 255, 0.04);
+    --bg-card-hover:    rgba(255, 255, 255, 0.07);
+    --border-subtle:    rgba(255, 255, 255, 0.08);
+    --border-glow:      rgba(0, 212, 255, 0.4);
+
+    --accent-primary:   #00d4ff;
+    --accent-secondary: #7b5ea7;
+    --accent-green:     #00d4a0;
+    --accent-amber:     #f0c420;
+    --accent-red:       #ff4757;
+    --accent-orange:    #ff8c42;
+
+    --text-primary:     #f0f4ff;
+    --text-secondary:   #8892a4;
+    --text-muted:       #4a5568;
+
+    --radius-sm:        8px;
+    --radius-md:        14px;
+    --radius-lg:        20px;
+
+    --shadow-glow:      0 0 30px rgba(0, 212, 255, 0.12);
+    --shadow-card:      0 8px 32px rgba(0, 0, 0, 0.4);
+
+    --transition:       all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Global Reset & Base ─────────────────────────────────── */
+html, body, [data-testid="stAppViewContainer"] {
+    background: var(--bg-primary) !important;
+    background-image:
+        radial-gradient(ellipse at 20% 10%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(123, 94, 167, 0.05) 0%, transparent 50%) !important;
+    color: var(--text-primary) !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+[data-testid="stHeader"] {
+    background: transparent !important;
+    border-bottom: 1px solid var(--border-subtle) !important;
+}
+
+[data-testid="stSidebar"] {
+    background: var(--bg-secondary) !important;
+    border-right: 1px solid var(--border-subtle) !important;
+}
+
+[data-testid="stSidebar"] * {
+    color: var(--text-primary) !important;
+}
+
+/* ── Main Content Area ───────────────────────────────────── */
+[data-testid="stMainBlockContainer"] {
+    padding: 1.5rem 2rem !important;
+    max-width: 1400px !important;
+}
+
+/* ── Typography ──────────────────────────────────────────── */
+h1 {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 2rem !important;
+    font-weight: 800 !important;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    letter-spacing: -0.03em !important;
+    margin-bottom: 0.25rem !important;
+}
+
+h2 {
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+}
+
+h3 {
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: var(--text-secondary) !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+}
+
+p, li, div {
+    font-family: 'Inter', sans-serif !important;
+    color: var(--text-primary) !important;
+    line-height: 1.65 !important;
+}
+
+/* ── Glassmorphic Card Component ─────────────────────────── */
+.glass-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.04) 0%,
+        rgba(255, 255, 255, 0.00) 100%
+    );
+    pointer-events: none;
+}
+
+.glass-card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(0, 212, 255, 0.2);
+    box-shadow: var(--shadow-card), var(--shadow-glow);
+    transform: translateY(-1px);
+}
+
+/* ── Metric Cards ────────────────────────────────────────── */
+.metric-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.1rem 1.25rem;
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.metric-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.metric-card:hover::after { transform: scaleX(1); }
+
+.metric-value {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--accent-primary);
+    line-height: 1;
+    margin: 0.4rem 0 0.2rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.metric-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.metric-icon {
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+/* ── Section Header ──────────────────────────────────────── */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.section-title {
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    color: var(--text-secondary) !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+}
+
+/* ── Status Badge ────────────────────────────────────────── */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* ── Prompt Display Box ──────────────────────────────────── */
+.prompt-box {
+    background: rgba(0, 212, 255, 0.05);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-left: 3px solid var(--accent-primary);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+    font-size: 1.0rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-style: italic;
+    margin: 0.75rem 0;
+}
+
+/* ── Transcript Box ──────────────────────────────────────── */
+.transcript-box {
+    background: rgba(8, 13, 26, 0.6);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.93rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+    max-height: 200px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-subtle) transparent;
+}
+
+.transcript-box::-webkit-scrollbar { width: 4px; }
+.transcript-box::-webkit-scrollbar-track { background: transparent; }
+.transcript-box::-webkit-scrollbar-thumb {
+    background: var(--border-subtle);
+    border-radius: 999px;
+}
+
+/* ── Coaching Panel ──────────────────────────────────────── */
+.coaching-panel {
+    background: rgba(123, 94, 167, 0.07);
+    border: 1px solid rgba(123, 94, 167, 0.25);
+    border-radius: var(--radius-md);
+    padding: 1.1rem 1.4rem;
+    margin-top: 0.5rem;
+}
+
+.coaching-item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.87rem;
+    line-height: 1.55;
+    color: var(--text-primary);
+}
+
+.coaching-item:last-child { border-bottom: none; }
+
+.coaching-icon {
+    flex-shrink: 0;
+    font-size: 1rem;
+    margin-top: 0.05rem;
+}
+
+/* ── Recording State Animation ───────────────────────────── */
+@keyframes pulse-ring {
+    0%   { transform: scale(0.95); opacity: 1; }
+    70%  { transform: scale(1.05); opacity: 0.5; }
+    100% { transform: scale(0.95); opacity: 1; }
+}
+
+.recording-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent-red);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    animation: pulse-ring 1.5s ease-in-out infinite;
+}
+
+/* ── History Session Cards ───────────────────────────────── */
+.history-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    transition: var(--transition);
+    cursor: default;
+}
+
+.history-card:hover {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(0,212,255,0.15);
+}
+
+/* ── Streamlit Widget Overrides ──────────────────────────── */
+/* Buttons */
+[data-testid="baseButton-primary"] {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, #0099cc 100%) !important;
+    color: #000 !important;
+    border: none !important;
+    border-radius: var(--radius-sm) !important;
+    font-weight: 700 !important;
+    font-family: 'Inter', sans-serif !important;
+    letter-spacing: 0.03em !important;
+    transition: var(--transition) !important;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3) !important;
+}
+
+[data-testid="baseButton-primary"]:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 25px rgba(0, 212, 255, 0.5) !important;
+}
+
+[data-testid="baseButton-secondary"] {
+    background: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: var(--radius-sm) !important;
+    font-family: 'Inter', sans-serif !important;
+    transition: var(--transition) !important;
+}
+
+[data-testid="baseButton-secondary"]:hover {
+    border-color: rgba(0,212,255,0.3) !important;
+    background: var(--bg-card-hover) !important;
+}
+
+/* Selectbox / Dropdowns */
+[data-testid="stSelectbox"] > div > div {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: var(--radius-sm) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Metrics */
+[data-testid="stMetric"] {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 1rem 1.25rem !important;
+}
+
+[data-testid="stMetricValue"] {
+    color: var(--accent-primary) !important;
+    font-weight: 800 !important;
+    font-size: 1.8rem !important;
+}
+
+[data-testid="stMetricLabel"] {
+    color: var(--text-secondary) !important;
+    font-size: 0.72rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+}
+
+/* Expander */
+[data-testid="stExpander"] {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: var(--radius-md) !important;
+}
+
+/* Info/Warning/Error alerts */
+[data-testid="stAlert"] {
+    border-radius: var(--radius-md) !important;
+}
+
+/* Spinner text */
+[data-testid="stSpinner"] p {
+    color: var(--accent-primary) !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+/* Divider */
+hr {
+    border-color: var(--border-subtle) !important;
+    margin: 1rem 0 !important;
+}
+
+/* Audio input widget */
+[data-testid="stAudioInput"] {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 0.75rem !important;
+}
+
+/* Sidebar select / radio */
+[data-testid="stRadio"] label,
+[data-testid="stCheckbox"] label {
+    color: var(--text-primary) !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+/* Column gap override for tighter layout */
+[data-testid="stHorizontalBlock"] {
+    gap: 1.5rem !important;
+}
+
+/* Progress bar */
+[data-testid="stProgress"] > div > div {
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)) !important;
+    border-radius: 999px !important;
+}
+
+/* ── Scrollbar Global ────────────────────────────────────── */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-subtle) transparent;
+}
+
+*::-webkit-scrollbar { width: 5px; height: 5px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+    background: var(--border-subtle);
+    border-radius: 999px;
+}
+
+/* ── Plotly Chart Containers ─────────────────────────────── */
+[data-testid="stPlotlyChart"] {
+    background: transparent !important;
+}
+
+/* ── App Header Branding ─────────────────────────────────── */
+.app-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 1.5rem;
+}
+
+.app-logo {
+    font-size: 2.2rem;
+    line-height: 1;
+}
+
+.app-tagline {
+    font-size: 0.8rem !important;
+    color: var(--text-secondary) !important;
+    font-weight: 400 !important;
+    margin-top: 0.15rem !important;
+}
+
+/* ── Column Labels ───────────────────────────────────────── */
+.column-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+}
+
+/* ── Animated gradient border for active panels ──────────── */
+@keyframes borderGlow {
+    0%, 100% { border-color: rgba(0,212,255,0.15); }
+    50%       { border-color: rgba(0,212,255,0.45); }
+}
+
+.panel-active {
+    animation: borderGlow 2.5s ease-in-out infinite;
+}
+
+/* ── Waveform visualization placeholder ──────────────────── */
+.waveform-container {
+    height: 60px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0,212,255,0.08) 50%,
+        transparent 100%
+    );
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem 0;
+    border: 1px dashed rgba(0,212,255,0.15);
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+}

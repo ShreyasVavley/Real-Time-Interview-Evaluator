@@ -389,8 +389,9 @@ def main() -> None:
     # Render top header
     _render_header()
 
-    # Pre-load models silently on first run
-    _warmup_models()
+    # Pre-load models silently on first run (disabled on startup to prevent blocking the health check thread)
+    # _warmup_models()
+
 
     # ── Two-column layout ─────────────────────────────────────────────────
     # Left (input): 2 units wide | Right (analytics): 3 units wide

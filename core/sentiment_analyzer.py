@@ -7,10 +7,25 @@
 # ============================================================
 
 import logging
+import nltk
 from textblob import TextBlob
 from config import SENTIMENT_POSITIVE_THRESHOLD, SENTIMENT_NEGATIVE_THRESHOLD
 
 logger = logging.getLogger(__name__)
+
+# Silent check and download of NLTK corpuses needed by TextBlob
+for corpus in ['punkt', 'averaged_perceptron_tagger', 'brown', 'conll2000', 'movie_reviews']:
+    try:
+        if corpus == 'punkt':
+            nltk.data.find('tokenizers/punkt')
+        elif 'tagger' in corpus:
+            nltk.data.find('taggers/averaged_perceptron_tagger')
+        else:
+            nltk.data.find(f'corpora/{corpus}')
+    except LookupError:
+        logger.info(f"Downloading missing NLTK corpus: {corpus}...")
+        nltk.download(corpus, quiet=True)
+
 
 
 def analyze_sentiment(transcript: str) -> dict:

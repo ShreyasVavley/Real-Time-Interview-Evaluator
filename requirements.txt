@@ -32,6 +32,9 @@ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1
 # --- Body Language & Computer Vision ---
 opencv-python-headless>=4.8.0.0
 deepface>=0.0.90
+tensorflow==2.15.0
+tf_keras
+
 
 # --- Reporting & Visualization ---
 plotly>=5.22.0

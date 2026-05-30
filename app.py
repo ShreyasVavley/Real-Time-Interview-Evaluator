@@ -125,9 +125,10 @@ def _render_sidebar() -> None:
         )
     else:
         st.sidebar.markdown(
-            '<div style="font-size:0.8rem; color:#f0c420;">⏳ Loading models...</div>',
+            '<div style="font-size:0.8rem; color:#f0c420;">💤 Ready (Models load on first run)</div>',
             unsafe_allow_html=True,
         )
+
 
     st.sidebar.markdown("---")
 
@@ -303,6 +304,8 @@ def _run_analysis(audio_bytes: bytes, video_bytes: Optional[bytes] = None) -> Op
             "video":      video_result,
             "duration_sec": round(duration, 1),
         }
+        st.session_state["models_loaded"] = True
+
 
     except ValueError as ve:
         # User-facing errors (bad audio, too short, etc.)

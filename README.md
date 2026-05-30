@@ -1,5 +1,9 @@
 # MockIQ: Real-Time Interview Evaluator
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://real-time-interview-evaluator-p8tcs6jnoupwkqmssgul4r.streamlit.app/)
+
+> **🚀 Live Web App:** Try the live deployed application directly on your browser: **[real-time-interview-evaluator-p8tcs6jnoupwkqmssgul4r.streamlit.app](https://real-time-interview-evaluator-p8tcs6jnoupwkqmssgul4r.streamlit.app/)**
+
 MockIQ is a fully local, privacy-first AI interview evaluator designed to help you practice and perfect your interview skills. It records your video and audio, processes it using state-of-the-art machine learning models, and provides comprehensive coaching on your content, fluency, body language, and grammar.
 
 ## 🚀 Features (V2.0)

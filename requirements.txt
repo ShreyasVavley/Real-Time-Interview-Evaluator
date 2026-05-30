@@ -25,9 +25,17 @@ scipy>=1.13.0
 
 # --- NLP & Text Analytics ---
 textblob>=0.18.0
+spacy>=3.7.0
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl
 
-# --- Visualization ---
+
+# --- Body Language & Computer Vision ---
+opencv-python>=4.8.0.0
+deepface>=0.0.90
+
+# --- Reporting & Visualization ---
 plotly>=5.22.0
+reportlab>=4.1.0
 
 # --- Utilities ---
 datasets>=2.19.0            # HuggingFace datasets (required by some pipelines)
